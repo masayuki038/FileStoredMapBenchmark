@@ -12,7 +12,7 @@
           <configuration>
             <archive>
               <manifest>
-                <mainClass>jp.example.command.Main</mainClass>
+                <mainClass>net.wrap_trap.collections.fsm.bench.Benchmark1</mainClass>
               </manifest>
             </archive>
           </configuration>
@@ -21,11 +21,12 @@
     </pluginManagement>
     <plugins>
       <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <descriptors>
-            <descriptor>src/main/assembly/distribution.xml</descriptor>
-          </descriptors>
+          <source>1.5</source>
+          <target>1.5</target>
+          <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
     </plugins>
