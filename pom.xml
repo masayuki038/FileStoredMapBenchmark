@@ -3,8 +3,34 @@
   <groupId>net.wrap-trap.collections</groupId>
   <artifactId>FileStoredMapBenchmark</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
-    <repositories>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.2</version>
+          <configuration>
+            <archive>
+              <manifest>
+                <mainClass>jp.example.command.Main</mainClass>
+              </manifest>
+            </archive>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <descriptors>
+            <descriptor>src/main/assembly/distribution.xml</descriptor>
+          </descriptors>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <repositories>
     <repository>
       <id>wrap-trap.net/maven2/snapshot</id>
       <name>wrap-trap.net Maven Repository</name>
