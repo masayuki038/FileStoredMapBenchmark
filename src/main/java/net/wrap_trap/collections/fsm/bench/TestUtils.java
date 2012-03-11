@@ -7,10 +7,12 @@ import org.apache.commons.io.FileUtils;
 
 public class TestUtils {
 
-    public static void deleteFiles(String path) {
+    public static void deleteDirectoryQuietly(String path) {
         try {
             FileUtils.deleteDirectory(new File(path));
-        } catch (IOException ignore) {}
+        } catch (IOException ignore) {
+            System.err.println("failed to remove " + path + ".");
+            System.err.println(ignore.getMessage());
+        }
     }
-
 }
