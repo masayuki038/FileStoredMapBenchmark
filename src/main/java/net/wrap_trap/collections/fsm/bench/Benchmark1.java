@@ -1,5 +1,7 @@
 package net.wrap_trap.collections.fsm.bench;
 
+import java.io.IOException;
+
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
@@ -17,7 +19,7 @@ public class Benchmark1 {
     @Option(name = "-e", aliases = "--entries", usage = "an amount of entries putting the container")
     private int entries = 30000;
 
-    public static void main(String[] args) throws CmdLineException {
+    public static void main(String[] args) throws CmdLineException, IOException {
         Benchmark1 b = new Benchmark1();
         CmdLineParser parser = new CmdLineParser(b);
         try {
@@ -33,7 +35,7 @@ public class Benchmark1 {
             return;
         }
 
-        Bench bench = null;
+        ReadWriteBench bench = null;
         switch (b.target) {
         case 1:
             bench = new FileStoredMapBench();
@@ -48,7 +50,8 @@ public class Benchmark1 {
 
         for (int i = 0; i < b.loop; i++) {
             bench.start(b.entries);
-            System.out.println("times: " + bench.getResult());
+            System.out.println(String.format("write: %s sec", bench.getWriteResult()));
+            System.out.println(String.format("read: %s sec", bench.getReadResult()));
         }
     }
 }
