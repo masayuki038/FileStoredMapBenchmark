@@ -10,6 +10,7 @@ import com.sleepycat.je.DatabaseException;
 import com.sleepycat.je.Environment;
 import com.sleepycat.je.EnvironmentConfig;
 import com.sleepycat.je.LockMode;
+import com.sleepycat.je.OperationStatus;
 
 public class BerkeleyDbBench extends ReadWriteBench {
 
@@ -55,10 +56,10 @@ public class BerkeleyDbBench extends ReadWriteBench {
     protected void read(int times) {
         try {
             for (int i = 1; i <= times; i++) {
-                Object obj = db.get(null, new DatabaseEntry(String.valueOf(i).getBytes("UTF-8")), null,
-                                    LockMode.READ_UNCOMMITTED);
-                if (obj == null) {
-                    throw new RuntimeException("obj is null");
+                OperationStatus status = db.get(null, new DatabaseEntry(String.valueOf(i).getBytes("UTF-8")),
+                                                new DatabaseEntry(), LockMode.READ_UNCOMMITTED);
+                if (status != OperationStatus.SUCCESS) {
+                    throw new RuntimeException("status != OperationStatus.SUCCESS");
                 }
             }
         } catch (DatabaseException e) {
