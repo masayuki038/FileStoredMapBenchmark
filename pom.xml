@@ -46,11 +46,6 @@
       <url>http://wrap-trap.net/maven2/snapshot</url>
     </repository>
     <repository>
-      <id>apache/staging</id>
-      <name>apache staging Maven Repository</name>
-      <url>https://repository.apache.org/service/local/staging/deploy/maven2</url>
-    </repository>
-    <repository>
       <id>oracleReleases</id>
       <name>Oracle Released Java Packages</name>
       <url>http://download.oracle.com/maven</url>
@@ -84,6 +79,31 @@
   		<groupId>com.sleepycat</groupId>
   		<artifactId>je</artifactId>
   		<version>5.0.34</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>ch.qos.logback</groupId>
+  		<artifactId>logback-core</artifactId>
+  		<version>1.0.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>commons-beanutils</groupId>
+  		<artifactId>commons-beanutils</artifactId>
+  		<version>20030211.134440</version>
+  	</dependency>
+  	<dependency>
+	    <groupId>com.ellipticgroup</groupId> 
+	    <artifactId>bb</artifactId> 
+	    <version>20100601</version> 
+  	</dependency>
+  	<dependency>
+  		<groupId>com.ellipticgroup</groupId>
+  		<artifactId>jsci-core</artifactId>
+  		<version>20100601</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.ellipticgroup</groupId>
+  		<artifactId>mt</artifactId>
+  		<version>1.3</version>
   	</dependency>
   </dependencies> 
 </project>

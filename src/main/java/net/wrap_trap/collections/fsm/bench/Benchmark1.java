@@ -6,7 +6,10 @@ import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
-public class Benchmark1 {
+import bb.util.Benchmark;
+import bb.util.Benchmark.Params;
+
+public class Benchmark1 extends Benchmark {
     @Option(name = "-h", aliases = "--help", usage = "print usage message and exit")
     private boolean usage;
 
@@ -35,23 +38,25 @@ public class Benchmark1 {
             return;
         }
 
-        ReadWriteBench bench = null;
+        ReadWriteBench task = null;
         switch (b.target) {
         case 1:
-            bench = new FileStoredMapBench();
+            task = new FileStoredMapBench(b.entries);
             break;
         case 2:
-            bench = new BerkeleyDbBench();
+            task = new BerkeleyDbBench(b.entries);
             break;
         default:
             parser.printUsage(System.err);
             return;
         }
 
-        for (int i = 0; i < b.loop; i++) {
-            bench.start(b.entries);
-            System.out.println(String.format("write: %s sec", bench.getWriteResult()));
-            System.out.println(String.format("read: %s sec", bench.getReadResult()));
-        }
+        Params params = new Params();
+        params.setManyExecutions(true);
+        params.setNumberMeasurements(b.loop);
+        params.setMeasureCpuTime(false);
+
+        Benchmark bb = new Benchmark(task, params);
+        System.out.println(bb.toStringFull());
     }
 }

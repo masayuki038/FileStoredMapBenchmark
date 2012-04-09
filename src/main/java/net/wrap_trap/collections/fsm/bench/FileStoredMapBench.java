@@ -9,12 +9,15 @@ public class FileStoredMapBench extends ReadWriteBench {
 
     private FileStoredMap<String> map;
 
+    public FileStoredMapBench(int times) {
+        super(times);
+    }
+
     @Override
     protected void write(int times) throws IOException {
-        StringBuilder sb = new StringBuilder();
+        String value = getValue();
         for (int i = 1; i <= times; i++) {
-            sb.append("a");
-            map.put(String.valueOf(i), sb.toString());
+            map.put(String.valueOf(i), value);
         }
     }
 
