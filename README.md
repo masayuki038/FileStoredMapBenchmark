@@ -9,7 +9,7 @@
 * mt-13.jar
     * wget http://www.ellipticgroup.com/misc/mt-13.jar
 
-### Install thease jars to your local repository of Maven.
+### Install these jars to your local repository of Maven.
     $ mvn install:install-file -Dfile=bb.jar -DgroupId=com.ellipticgroup \
       -DartifactId=bb -Dversion=20100601 -Dpackaging=jar
     $ mvn install:install-file -Dfile=jsci-core.jar -DgroupId=com.ellipticgroup \
