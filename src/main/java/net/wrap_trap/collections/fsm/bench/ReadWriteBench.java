@@ -4,8 +4,6 @@ import java.io.IOException;
 
 public abstract class ReadWriteBench implements Runnable {
 
-    private long writeResult;
-    private long readResult;
     private int entries;
 
     public int getEntries() {
@@ -20,23 +18,17 @@ public abstract class ReadWriteBench implements Runnable {
         this.value = createValue("a", entrySize);
     }
 
-    public long getWriteResult() {
-        return writeResult;
-    }
-
-    public long getReadResult() {
-        return readResult;
-    }
-
     public void run() {
         try {
             prepare();
             long startTime = System.currentTimeMillis();
             write();
-            writeResult = System.currentTimeMillis() - startTime;
+            long writeTime = System.currentTimeMillis() - startTime;
             startTime = System.currentTimeMillis();
             read();
-            readResult = System.currentTimeMillis() - startTime;
+            long readTime = System.currentTimeMillis() - startTime;
+            System.out.println(String.format("write: %d ms", writeTime));
+            System.out.println(String.format("read: %d ms", readTime));
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
