@@ -17,12 +17,12 @@ public class BerkeleyDbBench extends ReadWriteBench {
     private Database db;
     private Environment env;
 
-    public BerkeleyDbBench(int times) {
-        super(times);
+    public BerkeleyDbBench(int entries, int entrySize) {
+        super(entries, entrySize);
     }
 
     @Override
-    protected void prepare(int times) {
+    protected void prepare() {
         TestUtils.deleteDirectoryQuietly("tmp");
         File tmpDir = new File("tmp");
         tmpDir.mkdir();
@@ -41,10 +41,10 @@ public class BerkeleyDbBench extends ReadWriteBench {
     }
 
     @Override
-    protected void write(int times) {
+    protected void write() {
         try {
             String value = getValue();
-            for (int i = 1; i <= times; i++) {
+            for (int i = 1; i <= getEntries(); i++) {
                 db.put(null, new DatabaseEntry(String.valueOf(i).getBytes("UTF-8")),
                        new DatabaseEntry(value.getBytes("UTF-8")));
             }
@@ -56,9 +56,9 @@ public class BerkeleyDbBench extends ReadWriteBench {
     }
 
     @Override
-    protected void read(int times) {
+    protected void read() {
         try {
-            for (int i = 1; i <= times; i++) {
+            for (int i = 1; i <= getEntries(); i++) {
                 OperationStatus status = db.get(null, new DatabaseEntry(String.valueOf(i).getBytes("UTF-8")),
                                                 new DatabaseEntry(), LockMode.READ_UNCOMMITTED);
                 if (status != OperationStatus.SUCCESS) {

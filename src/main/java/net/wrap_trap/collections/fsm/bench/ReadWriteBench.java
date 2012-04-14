@@ -6,13 +6,18 @@ public abstract class ReadWriteBench implements Runnable {
 
     private long writeResult;
     private long readResult;
-    private int times;
+    private int entries;
+
+    public int getEntries() {
+        return entries;
+    }
+
     private String value;
 
-    public ReadWriteBench(int times) {
+    public ReadWriteBench(int entries, int entrySize) {
         super();
-        this.times = times;
-        this.value = createValue("a", times);
+        this.entries = entries;
+        this.value = createValue("a", entrySize);
     }
 
     public long getWriteResult() {
@@ -25,12 +30,12 @@ public abstract class ReadWriteBench implements Runnable {
 
     public void run() {
         try {
-            prepare(times);
+            prepare();
             long startTime = System.currentTimeMillis();
-            write(times);
+            write();
             writeResult = System.currentTimeMillis() - startTime;
             startTime = System.currentTimeMillis();
-            read(times);
+            read();
             readResult = System.currentTimeMillis() - startTime;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -43,11 +48,11 @@ public abstract class ReadWriteBench implements Runnable {
 
     abstract protected void cleanUp() throws IOException;
 
-    abstract protected void prepare(int times) throws IOException;
+    abstract protected void prepare() throws IOException;
 
-    abstract protected void write(int times) throws IOException;
+    abstract protected void write() throws IOException;
 
-    abstract protected void read(int times) throws IOException;
+    abstract protected void read() throws IOException;
 
     protected String getValue() {
         return this.value;

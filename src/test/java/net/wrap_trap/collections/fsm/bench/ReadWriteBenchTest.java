@@ -9,7 +9,7 @@ public class ReadWriteBenchTest {
 
     @Test
     public void testCreateValue() {
-        FileStoredMapBench bench = new FileStoredMapBench(5);
+        FileStoredMapBench bench = new FileStoredMapBench(5, 5);
         assertThat(bench.createValue("a", 5), is("aaaaa"));
         assertThat(bench.createValue("a", 10), is("aaaaaaaaaa"));
     }
