@@ -1,6 +1,7 @@
 package net.wrap_trap.collections.fsm.bench;
 
 import java.io.IOException;
+import java.util.UUID;
 
 public abstract class ReadWriteBench implements Runnable {
 
@@ -15,7 +16,7 @@ public abstract class ReadWriteBench implements Runnable {
     public ReadWriteBench(int entries, int entrySize) {
         super();
         this.entries = entries;
-        this.value = createValue("a", entrySize);
+        this.value = createUUID();
     }
 
     public void run() {
@@ -58,5 +59,9 @@ public abstract class ReadWriteBench implements Runnable {
             }
         }
         return ret;
+    }
+
+    protected String createUUID() {
+        return UUID.randomUUID().toString();
     }
 }
